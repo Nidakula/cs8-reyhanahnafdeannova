@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, Rocket, Code, Database } from "lucide-react";
+import { ChevronDown, ChevronUp, Rocket, Code, Mail, Phone, MapPin, Globe, Twitter, Facebook, Instagram, Linkedin, Database } from "lucide-react";
 import BGLogoHeroku from "./assets/BGLogoHeroku.svg";
 import LOGOHEROKU from "./assets/LOGOHEROKU.png";
 import BONOBOS from "./assets/BONOBOS.png";
@@ -180,6 +180,20 @@ const testimonials = [
   },
 ];
 
+// Contact information for footer
+const contactInfo = {
+  email: "contact@heroku.com",
+  phone: "+1 (123) 456-7890",
+  address: "650 7th Street, San Francisco, CA 94103",
+  website: "cs8-reyhanahnafdeannova.vercel.app",
+  socialMedia: [
+    { name: "Twitter", icon: <Twitter className="w-5 h-5" />, link: "https://twitter.com/heroku" },
+    { name: "Facebook", icon: <Facebook className="w-5 h-5" />, link: "https://facebook.com/heroku" },
+    { name: "Instagram", icon: <Instagram className="w-5 h-5" />, link: "https://instagram.com/heroku" },
+    { name: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, link: "https://linkedin.com/company/heroku" }
+  ]
+};
+
 export default function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const nextTestimonial = () => setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -190,12 +204,14 @@ export default function App() {
   const videoSectionRef = useRef(null);
   const languagesSectionRef = useRef(null);
   const trustSectionRef = useRef(null);
+  const footerRef = useRef(null);
   
   // Check if sections are in view
   const heroInView = useInView(heroRef, 0.1);
   const videoInView = useInView(videoSectionRef, 0.1);
   const languagesInView = useInView(languagesSectionRef, 0.1);
   const trustInView = useInView(trustSectionRef, 0.1);
+  const footerInView = useInView(footerRef, 0.1);
 
   return (
     <div className="min-h-screen bg-white text-[#3F3F44] font-sans text-sm leading-relaxed">
@@ -219,7 +235,7 @@ export default function App() {
             <a href="#" target="_blank" rel="noopener noreferrer" className="hover:underline">More</a>
           </nav>
           <div className="flex gap-4 text-sm">
-            <a href="#" className="hover:underline">Log in</a>
+            <a href="#" className="px-3 py-1 hover:underline">Log in</a>
             <a href="#" className="px-3 py-1 bg-white text-[#3c0d99] font-semibold rounded hover:bg-gray-100">Sign up</a>
           </div>
         </div>
@@ -306,9 +322,7 @@ export default function App() {
             custom={2}
             className="bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition"
           >
-          <a href="#" className="text-white text-sm mt-2 sm:mt-3">
-           Get Started Today
-          </a>
+            Get Started Today
           </motion.button>
         </section>
 
@@ -491,21 +505,126 @@ export default function App() {
         >
           <a href="#" className="bg-[#5222d0] hover:bg-purple-800 text-white font-bold py-2 px-6 rounded">Get Started Now</a>
           <div className="mt-4 text-sm">
-            <a href="#" className="text-[#5222d0] underline mr-4">View More Customers →</a>
-            <a href="#" className="text-[#5222d0] underline">Learn how agencies use Heroku →</a>
+            <a href="https://www.heroku.com/customers" target="_blank" rel="noopener noreferrer" className="text-[#5222d0] underline mr-4">View More Customers →</a>
+            <a href="https://www.heroku.com/agencies" target="_blank" rel="noopener noreferrer" className="text-[#5222d0] underline">Learn how agencies use Heroku →</a>
           </div>
         </motion.div>
       </section>
 
-      {/* Footer - Fade In */}
-      <motion.footer 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="bg-[#3c0d99] text-white text-center p-4 text-sm"
-      >
-        &copy; {new Date().getFullYear()} Reyhan Ahnaf Deannova 2306267100. All rights reserved.
-      </motion.footer>
+      {/* Footer with Contact Section */}
+      <footer ref={footerRef} className="bg-[#3c0d99] text-white">
+        {/* Contact Section */}
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <motion.div 
+            initial="hidden"
+            animate={footerInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            custom={0}
+            className="mb-8 text-center"
+          >
+            <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+            <p className="text-white/80 max-w-lg mx-auto">
+              Have questions about Heroku or need help with your application? Our team is here to assist you.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            initial="hidden"
+            animate={footerInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          >
+            {/* Contact Details */}
+            <motion.div variants={itemFadeIn} className="flex flex-col items-center md:items-start">
+              <h3 className="text-lg font-semibold mb-4">Get in Touch</h3>
+              <div className="flex items-center mb-3">
+                <Mail className="w-5 h-5 mr-2 text-purple-300" />
+                <a href={`mailto:${contactInfo.email}`} className="hover:underline">{contactInfo.email}</a>
+              </div>
+              <div className="flex items-center mb-3">
+                <Phone className="w-5 h-5 mr-2 text-purple-300" />
+                <a href={`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`} className="hover:underline">{contactInfo.phone}</a>
+              </div>
+              <div className="flex items-start mb-3">
+                <MapPin className="w-5 h-5 mr-2 text-purple-300 mt-1 flex-shrink-0" />
+                <span>{contactInfo.address}</span>
+              </div>
+              <div className="flex items-center">
+                <Globe className="w-5 h-5 mr-2 text-purple-300" />
+                <a href={`https://${contactInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:underline">{contactInfo.website}</a>
+              </div>
+            </motion.div>
+            
+            {/* Quick Links */}
+            <motion.div variants={itemFadeIn} className="flex flex-col items-center md:items-start">
+              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+              <a href="https://www.heroku.com/about" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">About Us</a>
+              <a href="https://www.heroku.com/careers" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">Careers</a>
+              <a href="https://blog.heroku.com/" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">Blog</a>
+              <a href="https://www.salesforce.com/company/legal/sfdc-website-terms-of-service/?_gl=1*108ctac*_ga*MTg0NjMyMzgzOS4xNzQ1MzgwNjcz*_ga_62RHPFWB9M*MTc0NTQ1NTQxNS42LjEuMTc0NTQ1NzI4OS4wLjAuMA" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">Terms of Service</a>
+              <a href="https://www.salesforce.com/company/legal/privacy/?_gl=1*1pm5c5y*_ga*MTg0NjMyMzgzOS4xNzQ1MzgwNjcz*_ga_62RHPFWB9M*MTc0NTQ1NTQxNS42LjEuMTc0NTQ1ODQyNS4wLjAuMA" target="_blank" rel="noopener noreferrer" className="hover:underline">Privacy Policy</a>
+            </motion.div>
+            
+            {/* Resources */}
+            <motion.div variants={itemFadeIn} className="flex flex-col items-center md:items-start">
+              <h3 className="text-lg font-semibold mb-4">Resources</h3>
+              <a href="https://devcenter.heroku.com/" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline" >Documentation</a>
+              <a href="https://status.heroku.com/" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">Status</a>
+              <a href="https://www.heroku.com/training-and-education" target="_blank" rel="noopener noreferrer" className="mb-2 hover:underline">Training & Education</a>
+              <a href="https://devcenter.heroku.com/start" target="_blank" rel="noopener noreferrer" className="hover:underline">Get Started</a>
+            </motion.div>
+            
+            {/* Newsletter */}
+            <motion.div variants={itemFadeIn} className="flex flex-col items-center md:items-start">
+              <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
+              <p className="mb-4 text-white/80">Subscribe to our newsletter for updates and new features.</p>
+              <div className="flex w-full">
+                <input 
+                  type="email" 
+                  placeholder="Your email" 
+                  className="px-3 py-2 bg-white/10 border border-white/20 rounded-l text-white placeholder-white/50 flex-1 focus:outline-none focus:ring-1 focus:ring-purple-300"
+                />
+                <button className="bg-[#1a8cff] px-4 py-2 rounded-r font-semibold hover:bg-blue-600 transition">
+                  Subscribe
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+          
+          {/* Social Media Links */}
+          <motion.div 
+            initial="hidden"
+            animate={footerInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            custom={1}
+            className="flex justify-center space-x-6 mb-8"
+          >
+            {contactInfo.socialMedia.map((social, idx) => (
+              <a 
+                key={idx} 
+                href={social.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-full hover:bg-white/20 transition"
+                aria-label={`Follow us on ${social.name}`}
+              >
+                {social.icon}
+              </a>
+            ))}
+          </motion.div>
+          
+          {/* Copyright */}
+          <motion.div 
+            initial="hidden"
+            animate={footerInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            custom={2}
+            className="text-center pt-6 border-t border-white/20"
+          >
+            <p>&copy; {new Date().getFullYear()} Reyhan Ahnaf Deannova 2306267100. All rights reserved.</p>
+          </motion.div>
+        </div>
+      </footer>
     </div>
   );
 }
