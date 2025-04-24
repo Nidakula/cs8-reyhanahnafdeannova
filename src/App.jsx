@@ -235,8 +235,8 @@ export default function App() {
             <a href="#" target="_blank" rel="noopener noreferrer" className="hover:underline">More</a>
           </nav>
           <div className="flex gap-4 text-sm">
-            <a href="#" className="px-3 py-1 hover:underline">Log in</a>
-            <a href="#" className="px-3 py-1 bg-white text-[#3c0d99] font-semibold rounded hover:bg-gray-100">Sign up</a>
+            <a href="https://id.heroku.com/login#" target="_blank" rel="noopener noreferrer" className="px-3 py-1 hover:underline">Log in</a>
+            <a href="https://signup.heroku.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-white text-[#3c0d99] font-semibold rounded hover:bg-gray-100">Sign up</a>
           </div>
         </div>
       </motion.header>
@@ -269,8 +269,8 @@ export default function App() {
               custom={2}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <a href="#" className="px-6 py-3 bg-[#1a8cff] font-semibold rounded shadow hover:bg-blue-600">Get Started Now</a>
-              <a href="#" className="underline text-white text-sm mt-2 sm:mt-3">Explore the Heroku Platform</a>
+              <a href="https://devcenter.heroku.com/start" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#1a8cff] font-semibold rounded shadow hover:bg-blue-600">Get Started Now</a>
+              <a href="https://www.heroku.com/platform" target="_blank" rel="noopener noreferrer" className="underline text-white text-sm mt-2 sm:mt-3">Explore the Heroku Platform</a>
             </motion.div>
           </motion.div>
           <motion.div 
@@ -322,7 +322,7 @@ export default function App() {
             custom={2}
             className="bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition"
           >
-            Get Started Today
+            <a href="#" >Get Started Today</a>
           </motion.button>
         </section>
 
@@ -392,7 +392,17 @@ export default function App() {
           transition={{ delay: 0.6 }}
           className="flex justify-center mt-4"
         >
-          <a href="#" className="text-[#5222d0] underline text-sm">View All Supported Languages →</a>
+          <motion.p 
+            initial="hidden"
+            animate={languagesInView ? "visible" : "hidden"}
+            variants={fadeIn}
+            custom={1}
+            className="max-w-xl mx-auto text-center"
+          >
+            In addition to our officially supported languages, 
+            you can use any language that runs on Linux with Heroku via a third-party buildpack.
+            <a href="https://elements.heroku.com/buildpacks" target="_blank" rel="noopener noreferrer" className="text-[#5222d0] text-sm">  All Heroku Buildpacks →</a>
+          </motion.p>
         </motion.div>
       </div>
 
